@@ -3,6 +3,8 @@ package ftg.djagui.Reunion.WebRest;
 import ftg.djagui.Reunion.Metier.MetierReunion;
 import ftg.djagui.Reunion.Model.Reunion;
 import ftg.djagui.Reunion.WebRest.Dto.DtoReunion;
+import ftg.djagui.Utilisateur.Model.Membres;
+import ftg.djagui.Utilisateur.WebRestController.Dto.DtoMembre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,5 +33,10 @@ public class RestReunion {
     @PutMapping("update/{idreunion}")
     Reunion update(@RequestBody DtoReunion dtoReunion, @PathVariable Long idreunion){
         return metierReunion.updateReunion(idreunion, dtoReunion);
+    }
+
+    @PutMapping("add/membre/{idpresident}")
+    Membres addMembre(@RequestBody DtoMembre dtoMembre, @PathVariable Long idpresident){
+        return metierReunion.addMembreToReunion(dtoMembre, idpresident);
     }
 }

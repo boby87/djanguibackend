@@ -5,7 +5,10 @@ import ftg.djagui.Reunion.Metier.MetierReunion;
 import ftg.djagui.Reunion.Model.Reunion;
 import ftg.djagui.Reunion.WebRest.Dto.DtoReunion;
 import ftg.djagui.Utilisateur.Dao.DaoPresident;
+import ftg.djagui.Utilisateur.Metier.MetierMembre;
+import ftg.djagui.Utilisateur.Model.Membres;
 import ftg.djagui.Utilisateur.Model.President;
+import ftg.djagui.Utilisateur.WebRestController.Dto.DtoMembre;
 import ftg.djagui.configuration.ErrorMessage.ErrorMessages;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,8 @@ public class ServiceReunion implements MetierReunion {
     DaoReunion daoReunion;
     @Autowired
     DaoPresident daoPresident;
+    @Autowired
+    MetierMembre metierMembre;
     @Override
     public Reunion saveReunion(DtoReunion dtoReunion, Long idpresident) {
         President president=daoPresident.getById(idpresident);
@@ -46,5 +51,13 @@ public class ServiceReunion implements MetierReunion {
     @Override
     public List<Reunion> getAll() {
         return daoReunion.findAll();
+    }
+
+    @Override
+    public Membres addMembreToReunion(DtoMembre dtoMembre, Long idpresident) {
+        President president=daoPresident.getById(idpresident);
+        Membres membres=metierMembre.save(dtoMembre);
+        membres.setReunion(president.getReunion());
+        return membres;
     }
 }

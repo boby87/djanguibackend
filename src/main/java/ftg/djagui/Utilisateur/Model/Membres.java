@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import ftg.djagui.Reunion.Model.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class Membres {
     @Column(columnDefinition = "text")
     private String image;
     private String password;
+    private Date date=new Date();
     @ManyToOne
     @JoinColumn(name = "idreunion")
     private Reunion reunion;
