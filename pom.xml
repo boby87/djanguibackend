@@ -8,8 +8,8 @@
 		<version>2.5.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>ftg.lounk</groupId>
-	<artifactId>lounk</artifactId>
+	<groupId>ftg.djagui</groupId>
+	<artifactId>djagui</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>lounk</name>
 	<description>Application des reunion </description>
@@ -43,7 +43,11 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.5.9</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
