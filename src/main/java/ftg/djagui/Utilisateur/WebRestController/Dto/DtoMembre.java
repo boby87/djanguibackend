@@ -1,5 +1,7 @@
 package ftg.djagui.Utilisateur.WebRestController.Dto;
 
+import java.util.Date;
+
 public class DtoMembre {
     private String nomcomplet;
     private String cni;
@@ -9,7 +11,8 @@ public class DtoMembre {
     private String role;
     private String password;
     private String image;
-
+    private Date datenaissance;
+    private String username;
 
 
     public String getNomcomplet() {
@@ -74,5 +77,21 @@ public class DtoMembre {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Date getDatenaissance() {
+        return datenaissance;
+    }
+
+    public void setDatenaissance(Date datenaissance) {
+        this.datenaissance = datenaissance;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

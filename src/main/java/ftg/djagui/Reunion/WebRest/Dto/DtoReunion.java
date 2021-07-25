@@ -8,7 +8,7 @@ public class DtoReunion {
     private String telephone;
     private String email;
     private String logo;
-
+    private double montanttontine;
     public String getLibelle() {
         return libelle;
     }
@@ -39,5 +39,13 @@ public class DtoReunion {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    public double getMontanttontine() {
+        return montanttontine;
+    }
+
+    public void setMontanttontine(double montanttontine) {
+        this.montanttontine = montanttontine;
     }
 }

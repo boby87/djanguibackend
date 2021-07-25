@@ -1,5 +1,11 @@
 package ftg.djagui.Reunion.Model;
 
+import ftg.djagui.AideMembre.Model.Aide;
+import ftg.djagui.Cotisation.Model.Cotisation;
+import ftg.djagui.FondCasisse.Model.FondCaisse;
+import ftg.djagui.Sentions.Model.Sention;
+import ftg.djagui.Tontine.Model.Tontine;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,8 +16,24 @@ public class Seances {
     private Date date;
     private String libelle;//les differentes date de la reunion
     private Date jourreunion;
+    private Date jourtontine;
     private String ordredujour;
     private String rapport;
+    @OneToOne
+    @JoinColumn(name = "idcotisation")
+    private Cotisation cotisation;
+    @OneToOne
+    @JoinColumn(name = "idsention")
+    private Sention sention;
+    @OneToOne
+    @JoinColumn(name = "idtontine")
+    private Tontine tontine;
+    @OneToOne
+    @JoinColumn(name = "idfond")
+    private FondCaisse fondCaisse;
+    @OneToOne
+    @JoinColumn(name = "idaide")
+    private Aide aide;
     @ManyToOne
     @JoinColumn(name = "idreunion")
     private Reunion reunion;
@@ -70,5 +92,13 @@ public class Seances {
 
     public void setReunion(Reunion reunion) {
         this.reunion = reunion;
+    }
+
+    public Date getJourtontine() {
+        return jourtontine;
+    }
+
+    public void setJourtontine(Date jourtontine) {
+        this.jourtontine = jourtontine;
     }
 }

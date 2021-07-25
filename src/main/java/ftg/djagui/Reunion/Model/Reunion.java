@@ -15,6 +15,8 @@ public class Reunion {
     @Column(unique = true)
     private String libelle;
     private String telephone;
+    private double montanttontine;
+    private String createur;
     private String email;
     private Date date=new Date();
     @Column(columnDefinition = "text")
@@ -97,5 +99,21 @@ public class Reunion {
 
     public void setLogo(String logo) {
         this.logo = logo;
+    }
+
+    public double getMontanttontine() {
+        return montanttontine;
+    }
+
+    public void setMontanttontine(double montanttontine) {
+        this.montanttontine = montanttontine;
+    }
+
+    public String getCreateur() {
+        return createur;
+    }
+
+    public void setCreateur(String createur) {
+        this.createur = createur;
     }
 }

@@ -35,7 +35,7 @@ public class RestMembre {
     }
 
     @PutMapping("update/roles/{role}/{idmembre}")
-    Membres updateMembre(@PathVariable String role,@PathVariable Long idmembre){
+    Membres updaterole(@PathVariable String role,@PathVariable Long idmembre){
         return metierMembre.changeRoleMembre(role,idmembre);
     }
 

@@ -1,6 +1,6 @@
-package ftg.djagui.Reunion.Dao;
+package ftg.djagui.Sentions.Dao;
 
-import ftg.djagui.Reunion.Model.Sention;
+import ftg.djagui.Sentions.Model.Sention;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DaoSentions extends JpaRepository<Sention,Long> {

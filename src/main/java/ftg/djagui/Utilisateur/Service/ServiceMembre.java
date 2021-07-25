@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,28 +52,40 @@ public class ServiceMembre implements MetierMembre {
         String hashpw = bCryptPasswordEncoder.encode(dtoMembre.getPassword());
         Roles roles = daoRoles.findByRole(dtoMembre.getRole());
         if (roles == null) throw new ErrorMessages("merci de choisir un role qui existe", HttpStatus.NO_CONTENT);
-        Membres membres;
+        Membres membres=findByUsernameOrEmailOrPhone(dtoMembre.getUsername());
+        if (membres!=null)throw new ErrorMessages("Le username est deja utiliser",HttpStatus.CONFLICT);
         if (roles.getRole().equals(RoleStatus.PRESIDENT)){
-            membres=daoPresident.save(new President(dtoMembre.getNomcomplet(), dtoMembre.getCni(),
-                    dtoMembre.getSexe(), dtoMembre.getTelephone(), dtoMembre.getEmails(), dtoMembre.getImage(), hashpw));
-            metierRoles.addRoleToUser(roles.getRole(),membres);
+            President president=new President();
+            BeanUtils.copyProperties(dtoMembre,president);
+            president.setPassword(hashpw);
+            membres=daoPresident.save(president);
+            membres= metierRoles.addRoleToUser(roles.getRole(),membres);
 
         }else if (roles.getRole().equals(RoleStatus.SECRETAIRE)){
-            membres=daoSecretaire.save(new Secretaire(dtoMembre.getNomcomplet(), dtoMembre.getCni(),
-                    dtoMembre.getSexe(), dtoMembre.getTelephone(), dtoMembre.getEmails(), dtoMembre.getImage(), hashpw));
+            Secretaire secretaire=new Secretaire();
+            BeanUtils.copyProperties(dtoMembre,secretaire);
+            secretaire.setPassword(hashpw);
+            membres=daoSecretaire.save(secretaire);
         }else if (roles.getRole().equals(RoleStatus.TRESORIE)){
-            membres=daoTresorie.save(new Tresorie(dtoMembre.getNomcomplet(), dtoMembre.getCni(),
-                    dtoMembre.getSexe(), dtoMembre.getTelephone(), dtoMembre.getEmails(), dtoMembre.getImage(), hashpw));
+            Tresorie tresorie=new Tresorie();
+            BeanUtils.copyProperties(dtoMembre,tresorie);
+            tresorie.setPassword(hashpw);
+            membres=daoTresorie.save(tresorie);
         }else if (roles.getRole().equals(RoleStatus.COMMISSAIRE_AU_COMPTE)){
-            membres=daoCommissairecompte.save(new Commissairecompte(dtoMembre.getNomcomplet(), dtoMembre.getCni(),
-                    dtoMembre.getSexe(), dtoMembre.getTelephone(), dtoMembre.getEmails(), dtoMembre.getImage(), hashpw));
+            Commissairecompte commissairecompte=new Commissairecompte();
+            BeanUtils.copyProperties(dtoMembre,commissairecompte);
+            commissairecompte.setPassword(hashpw);
+            membres=daoCommissairecompte.save(commissairecompte);
         }else if (roles.getRole().equals(RoleStatus.SENCEUR)){
-            membres=daoSenceur.save(new Senseur(dtoMembre.getNomcomplet(), dtoMembre.getCni(),
-                    dtoMembre.getSexe(), dtoMembre.getTelephone(), dtoMembre.getEmails(), dtoMembre.getImage(), hashpw));
+            Senseur senseur=new Senseur();
+            BeanUtils.copyProperties(dtoMembre,senseur);
+            senseur.setPassword(hashpw);
+            membres=daoSenceur.save(senseur);
         }else {
-            membres=daoAderants.save(new Aderants(dtoMembre.getNomcomplet(), dtoMembre.getCni(),
-                    dtoMembre.getSexe(), dtoMembre.getTelephone(), dtoMembre.getEmails(), dtoMembre.getImage(), hashpw));
-
+            Aderants aderants=new Aderants();
+            BeanUtils.copyProperties(dtoMembre,aderants);
+            aderants.setPassword(hashpw);
+            membres=daoAderants.save(aderants);
         }
         membres.getRoles().add(roles);
         membres= metierRoles.addRoleToUser(RoleStatus.ADERANT,membres);

@@ -1,7 +1,11 @@
 package ftg.djagui.Utilisateur.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import ftg.djagui.AideMembre.Model.Aide;
+import ftg.djagui.AideMembre.Model.EnregistrementAide;
+import ftg.djagui.Cotisation.Model.EnregistementCotisation;
 import ftg.djagui.Reunion.Model.*;
+import ftg.djagui.Sentions.Model.EnregistrerSentions;
+import ftg.djagui.Tontine.Model.EnregistrerTontine;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,12 +21,11 @@ public class Membres {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idmembre;
     private String nomcomplet;
-    @Column(unique = true)
     private String cni;
     private String sexe;
-    @Column(unique = true)
     private String telephone;
-    @Column(unique = true)
+    private Date datenaissance;
+    private String username;
     private String emails;
     private boolean statut=true;
     @Column(columnDefinition = "text")
@@ -36,13 +39,13 @@ public class Membres {
     //FetchType.EAGER : indique que la relation doit être chargée en même temps que l'entité qui la porte.
     Set<Roles> roles =new HashSet<>();
     @OneToMany(mappedBy = "membres")
-    List<Cotisation> cotisations;
+    List<EnregistementCotisation> enregistementCotisations;
     @OneToMany(mappedBy = "membres")
-    List<Tontine> tontines;
+    List<EnregistrerTontine> enregistrerTontines;
     @OneToMany(mappedBy = "membres")
-    List<Aide> aides;
+    List<EnregistrementAide> enregistrementAides;
     @OneToMany(mappedBy = "membres")
-    List<Sention> sentions;
+    List<EnregistrerSentions> enregistrerSentions;
 
     public Membres() {
     }
@@ -145,35 +148,59 @@ public class Membres {
         this.reunion = reunion;
     }
 
-    public List<Cotisation> getCotisations() {
-        return cotisations;
+    public List<EnregistementCotisation> getEnregistementCotisations() {
+        return enregistementCotisations;
     }
 
-    public void setCotisations(List<Cotisation> cotisations) {
-        this.cotisations = cotisations;
+    public void setEnregistementCotisations(List<EnregistementCotisation> enregistementCotisations) {
+        this.enregistementCotisations = enregistementCotisations;
     }
 
-    public List<Tontine> getTontines() {
-        return tontines;
+    public List<EnregistrementAide> getEnregistrementAides() {
+        return enregistrementAides;
     }
 
-    public void setTontines(List<Tontine> tontines) {
-        this.tontines = tontines;
+    public void setEnregistrementAides(List<EnregistrementAide> enregistrementAides) {
+        this.enregistrementAides = enregistrementAides;
     }
 
-    public List<Aide> getAides() {
-        return aides;
+    public List<EnregistrerTontine> getEnregistrerTontines() {
+        return enregistrerTontines;
     }
 
-    public void setAides(List<Aide> aides) {
-        this.aides = aides;
+    public void setEnregistrerTontines(List<EnregistrerTontine> enregistrerTontines) {
+        this.enregistrerTontines = enregistrerTontines;
     }
 
-    public List<Sention> getSentions() {
-        return sentions;
+    public List<EnregistrerSentions> getEnregistrerSentions() {
+        return enregistrerSentions;
     }
 
-    public void setSentions(List<Sention> sentions) {
-        this.sentions = sentions;
+    public void setEnregistrerSentions(List<EnregistrerSentions> enregistrerSentions) {
+        this.enregistrerSentions = enregistrerSentions;
+    }
+
+    public Date getDatenaissance() {
+        return datenaissance;
+    }
+
+    public void setDatenaissance(Date datenaissance) {
+        this.datenaissance = datenaissance;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

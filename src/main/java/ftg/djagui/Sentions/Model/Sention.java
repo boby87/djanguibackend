@@ -1,8 +1,11 @@
-package ftg.djagui.Reunion.Model;
+package ftg.djagui.Sentions.Model;
 
+import ftg.djagui.Reunion.Model.Seances;
+import ftg.djagui.Tontine.Model.EnregistrerTontine;
 import ftg.djagui.Utilisateur.Model.Membres;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Sention {
@@ -11,9 +14,11 @@ public class Sention {
     private Long idsention;
     private double montant;
     private String libelle;
-    @ManyToOne()
-    @JoinColumn(name = "idmembre")
-    private Membres membres;
+    @OneToMany(mappedBy = "sention")
+    private List<EnregistrerSentions> enregistrerSentions;
+    @OneToOne(mappedBy = "sention")
+    @PrimaryKeyJoinColumn
+    private Seances seances;
 
     public Long getIdsention() {
         return idsention;
@@ -39,11 +44,5 @@ public class Sention {
         this.libelle = libelle;
     }
 
-    public Membres getMembres() {
-        return membres;
-    }
 
-    public void setMembres(Membres membres) {
-        this.membres = membres;
-    }
 }
