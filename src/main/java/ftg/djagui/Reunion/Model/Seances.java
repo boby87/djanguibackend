@@ -1,5 +1,6 @@
 package ftg.djagui.Reunion.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ftg.djagui.AideMembre.Model.Aide;
 import ftg.djagui.Cotisation.Model.Cotisation;
 import ftg.djagui.FondCasisse.Model.FondCaisse;
@@ -34,6 +35,7 @@ public class Seances {
     @OneToOne
     @JoinColumn(name = "idaide")
     private Aide aide;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "idreunion")
     private Reunion reunion;
@@ -100,5 +102,45 @@ public class Seances {
 
     public void setJourtontine(Date jourtontine) {
         this.jourtontine = jourtontine;
+    }
+
+    public Cotisation getCotisation() {
+        return cotisation;
+    }
+
+    public void setCotisation(Cotisation cotisation) {
+        this.cotisation = cotisation;
+    }
+
+    public Sention getSention() {
+        return sention;
+    }
+
+    public void setSention(Sention sention) {
+        this.sention = sention;
+    }
+
+    public Tontine getTontine() {
+        return tontine;
+    }
+
+    public void setTontine(Tontine tontine) {
+        this.tontine = tontine;
+    }
+
+    public FondCaisse getFondCaisse() {
+        return fondCaisse;
+    }
+
+    public void setFondCaisse(FondCaisse fondCaisse) {
+        this.fondCaisse = fondCaisse;
+    }
+
+    public Aide getAide() {
+        return aide;
+    }
+
+    public void setAide(Aide aide) {
+        this.aide = aide;
     }
 }

@@ -18,9 +18,13 @@ public class Reunion {
     private double montanttontine;
     private String createur;
     private String email;
+    private String devise;
     private Date date=new Date();
     @Column(columnDefinition = "text")
     private String logo;
+    @Column(columnDefinition = "text")
+    private String statuts;
+    private boolean etat=true;
     @JsonIgnore
     @OneToMany(mappedBy = "reunion")
     List<Membres> membres;
@@ -115,5 +119,29 @@ public class Reunion {
 
     public void setCreateur(String createur) {
         this.createur = createur;
+    }
+
+    public String getDevise() {
+        return devise;
+    }
+
+    public void setDevise(String devise) {
+        this.devise = devise;
+    }
+
+    public String getStatuts() {
+        return statuts;
+    }
+
+    public void setStatuts(String statuts) {
+        this.statuts = statuts;
+    }
+
+    public boolean isEtat() {
+        return etat;
+    }
+
+    public void setEtat(boolean etat) {
+        this.etat = etat;
     }
 }

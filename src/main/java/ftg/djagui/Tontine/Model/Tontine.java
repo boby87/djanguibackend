@@ -83,4 +83,5 @@ public class Tontine {
     public void setSeances(Seances seances) {
         this.seances = seances;
     }
+
 }

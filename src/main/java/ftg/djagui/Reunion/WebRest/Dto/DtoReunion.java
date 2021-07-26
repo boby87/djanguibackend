@@ -9,6 +9,8 @@ public class DtoReunion {
     private String email;
     private String logo;
     private double montanttontine;
+    private String devise;
+    private String statuts;
     public String getLibelle() {
         return libelle;
     }
@@ -47,5 +49,21 @@ public class DtoReunion {
 
     public void setMontanttontine(double montanttontine) {
         this.montanttontine = montanttontine;
+    }
+
+    public String getDevise() {
+        return devise;
+    }
+
+    public void setDevise(String devise) {
+        this.devise = devise;
+    }
+
+    public String getStatuts() {
+        return statuts;
+    }
+
+    public void setStatuts(String statuts) {
+        this.statuts = statuts;
     }
 }
