@@ -55,7 +55,7 @@ public class ServiceRole implements MetierRoles {
         return daoRoles.findByRole(role);
     }
 
-   // @Bean
+    @Bean
     void ajouterRole() {
         daoRoles.save(new Roles(RoleStatus.ADMIN));
         daoRoles.save(new Roles(RoleStatus.PRESIDENT));
