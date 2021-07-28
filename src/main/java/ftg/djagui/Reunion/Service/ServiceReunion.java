@@ -31,10 +31,11 @@ public class ServiceReunion implements MetierReunion {
     public Reunion saveReunion(DtoReunion dtoReunion, Long idpresident) {
         President president=daoPresident.getById(idpresident);
         if (president==null) throw new ErrorMessages("Vous n'etes pas autorisé à créer une reunion", HttpStatus.UNAUTHORIZED);
+        if (daoReunion.findByLibelleIgnoreCase(dtoReunion.getLibelle())!=null)throw new ErrorMessages("Bien vouloir changer le nom de la reunion", HttpStatus.UNAUTHORIZED);
         Reunion reunion=new Reunion();
         BeanUtils.copyProperties(dtoReunion,reunion);
         reunion.setCreateur(president.getUsername());
-        reunion=daoReunion.save(new Reunion(dtoReunion.getLibelle(),dtoReunion.getTelephone(), dtoReunion.getEmail(), dtoReunion.getLogo()));
+        reunion=daoReunion.save(reunion);
         president.setReunion(reunion);
         return reunion;
     }

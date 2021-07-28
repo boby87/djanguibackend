@@ -41,8 +41,9 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .authorizeRequests().antMatchers("/login/**", "/role/**", "/app-endpoint/**", "/api-docs/**", "/topic/**", "/app/**","/swagger-ui.html/**").permitAll()
-        .and().authorizeRequests().antMatchers("/etablissement/**", "/user/**",
+        .authorizeRequests().antMatchers("/login/**", "/role/**","/membre/register", "/app-endpoint/**",
+                "/api-docs/**", "/topic/**", "/app/**","/swagger-ui.html/**").permitAll()
+        .and().authorizeRequests().antMatchers("/reunion/**", "/membre/**",
                 "/annee/**","/classe/**","/matiere/**","/emploidutemps/**").hasAnyAuthority(RoleStatus.PRESIDENT)
         //.and().authorizeRequests().anyRequest().authenticated()
         .and().addFilter(new JWTauthentificationFilter(authenticationManager()))

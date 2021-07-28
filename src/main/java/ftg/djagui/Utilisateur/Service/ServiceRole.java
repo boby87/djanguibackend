@@ -57,13 +57,15 @@ public class ServiceRole implements MetierRoles {
 
     @Bean
     void ajouterRole() {
-        daoRoles.save(new Roles(RoleStatus.ADMIN));
-        daoRoles.save(new Roles(RoleStatus.PRESIDENT));
-        daoRoles.save(new Roles(RoleStatus.SECRETAIRE));
-        daoRoles.save(new Roles(RoleStatus.TRESORIE));
-        daoRoles.save(new Roles(RoleStatus.COMMISSAIRE_AU_COMPTE));
-        daoRoles.save(new Roles(RoleStatus.SENCEUR));
-        daoRoles.save(new Roles(RoleStatus.ADERANT));
+        if(daoRoles.findAll().size()==0) {
+            daoRoles.save(new Roles(RoleStatus.ADMIN));
+            daoRoles.save(new Roles(RoleStatus.PRESIDENT));
+            daoRoles.save(new Roles(RoleStatus.SECRETAIRE));
+            daoRoles.save(new Roles(RoleStatus.TRESORIE));
+            daoRoles.save(new Roles(RoleStatus.COMMISSAIRE_AU_COMPTE));
+            daoRoles.save(new Roles(RoleStatus.SENCEUR));
+            daoRoles.save(new Roles(RoleStatus.ADERANT));
+        }
     }
 
 }

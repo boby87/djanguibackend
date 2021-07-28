@@ -37,7 +37,7 @@ public class JWTauthentificationFilter extends UsernamePasswordAuthenticationFil
         //ObjectMapper permet de recuperer un    objet json et de le stoker (rendre) dans une class java
         try {
             Membres membres=new ObjectMapper().readValue(request.getInputStream(), Membres.class);
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken( membres.getTelephone(),membres.getPassword()));
+            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken( membres.getUsername(),membres.getPassword()));
         } catch (IOException e) {
             throw new ErrorMessages("L'utilisateur n'a pas été identifié", HttpStatus.CONFLICT);
         }
