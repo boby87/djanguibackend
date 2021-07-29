@@ -29,7 +29,7 @@ public class ServiceReunion implements MetierReunion {
     MetierMembre metierMembre;
     @Override
     public Reunion saveReunion(DtoReunion dtoReunion, Long idpresident) {
-        President president=daoPresident.getById(idpresident);
+        President president=daoPresident.findByIdmembre(idpresident);
         if (president==null) throw new ErrorMessages("Vous n'etes pas autorisé à créer une reunion", HttpStatus.UNAUTHORIZED);
         if (daoReunion.findByLibelleIgnoreCase(dtoReunion.getLibelle())!=null)throw new ErrorMessages("Bien vouloir changer le nom de la reunion", HttpStatus.UNAUTHORIZED);
         Reunion reunion=new Reunion();

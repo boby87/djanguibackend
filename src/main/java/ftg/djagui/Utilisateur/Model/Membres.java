@@ -50,15 +50,6 @@ public class Membres {
     public Membres() {
     }
 
-    public Membres(String nomcomplet, String cni, String sexe, String telephone, String emails, String image, String password) {
-        this.nomcomplet = nomcomplet;
-        this.cni = cni;
-        this.sexe = sexe;
-        this.telephone = telephone;
-        this.emails = emails;
-        this.image = image;
-        this.password = password;
-    }
 
     public Long getIdmembre() {
         return idmembre;
