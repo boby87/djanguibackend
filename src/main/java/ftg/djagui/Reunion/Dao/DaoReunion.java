@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DaoReunion extends JpaRepository<Reunion,Long> {
     Reunion findByLibelleIgnoreCase(String libelle);
+    Reunion findByReference(String reference);
+
 }

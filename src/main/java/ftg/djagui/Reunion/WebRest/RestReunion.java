@@ -30,6 +30,12 @@ public class RestReunion {
     Reunion getBy(@PathVariable String reunion){
         return metierReunion.getByname(reunion);
     }
+
+    @GetMapping("by/{reference}")
+    Reunion getByReference(@PathVariable String reference){
+        return metierReunion.findreunionByreference(reference);
+    }
+
     @PutMapping("update/{idreunion}")
     Reunion update(@RequestBody DtoReunion dtoReunion, @PathVariable Long idreunion){
         return metierReunion.updateReunion(idreunion, dtoReunion);

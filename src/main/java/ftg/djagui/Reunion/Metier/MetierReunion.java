@@ -12,7 +12,8 @@ public interface MetierReunion {
     Reunion saveReunion(DtoReunion dtoReunion,Long idpresident);
     Reunion updateReunion(Long idreunion, DtoReunion dtoReunion);
     Reunion getByname(String libelle);
+    Reunion findreunionByreference(String reference);
     List<Reunion> getAll();
     Membres addMembreToReunion(DtoMembre dtoMembre, Long idpresident);
-
+    String randomString(int len);
 }

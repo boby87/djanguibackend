@@ -13,6 +13,7 @@ public class DtoMembre {
     private String image;
     private Date datenaissance;
     private String username;
+    private String referent_reunion;
 
 
     public String getNomcomplet() {
@@ -93,5 +94,13 @@ public class DtoMembre {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getReferent_reunion() {
+        return referent_reunion;
+    }
+
+    public void setReferent_reunion(String referent_reunion) {
+        this.referent_reunion = referent_reunion;
     }
 }

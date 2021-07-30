@@ -1,6 +1,8 @@
 package ftg.djagui.Utilisateur.Service;
 
 import ftg.djagui.CONSTANTE.RoleStatus;
+import ftg.djagui.Reunion.Dao.DaoReunion;
+import ftg.djagui.Reunion.Model.Reunion;
 import ftg.djagui.Utilisateur.WebRestController.Dto.DtoMembre;
 import ftg.djagui.Utilisateur.Dao.*;
 import ftg.djagui.Utilisateur.Metier.MetierMembre;
@@ -27,6 +29,8 @@ public class ServiceMembre implements MetierMembre {
     private MetierRoles metierRoles;
     @Autowired
     DaoRoles daoRoles;
+    @Autowired
+    DaoReunion daoReunion;
     @Autowired
     DaoAderants daoAderants;
     @Autowired
@@ -86,6 +90,12 @@ public class ServiceMembre implements MetierMembre {
             BeanUtils.copyProperties(dtoMembre,aderants);
             aderants.setPassword(hashpw);
             membres=daoAderants.save(aderants);
+        }
+
+        if (dtoMembre.getReferent_reunion()==null){
+            Reunion reunion=daoReunion.findByReference(dtoMembre.getReferent_reunion());
+            if (reunion==null) throw new ErrorMessages("Il y a un probléme avec la reference de la reunion",HttpStatus.FOUND);
+            membres.setReunion(reunion);
         }
         membres.getRoles().add(roles);
         membres= metierRoles.addRoleToUser(RoleStatus.ADERANT,membres);

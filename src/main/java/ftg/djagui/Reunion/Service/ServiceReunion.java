@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 @Service
@@ -27,6 +28,8 @@ public class ServiceReunion implements MetierReunion {
     DaoPresident daoPresident;
     @Autowired
     MetierMembre metierMembre;
+
+    static SecureRandom rnd = new SecureRandom();
     @Override
     public Reunion saveReunion(DtoReunion dtoReunion, Long idpresident) {
         President president=daoPresident.findByIdmembre(idpresident);
@@ -35,6 +38,7 @@ public class ServiceReunion implements MetierReunion {
         Reunion reunion=new Reunion();
         BeanUtils.copyProperties(dtoReunion,reunion);
         reunion.setCreateur(president.getUsername());
+        reunion.setReference(randomString(8));
         reunion=daoReunion.save(reunion);
         president.setReunion(reunion);
         return reunion;
@@ -53,6 +57,11 @@ public class ServiceReunion implements MetierReunion {
     }
 
     @Override
+    public Reunion findreunionByreference(String reference) {
+        return daoReunion.findByReference(reference);
+    }
+
+    @Override
     public List<Reunion> getAll() {
         return daoReunion.findAll();
     }
@@ -63,5 +72,16 @@ public class ServiceReunion implements MetierReunion {
         Membres membres=metierMembre.save(dtoMembre);
         membres.setReunion(president.getReunion());
         return membres;
+    }
+
+    @Override
+    public String randomString(int len) {
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++)
+            sb.append(AB.charAt(rnd.nextInt(AB.length())));
+        System.out.println("*************************" + sb.toString());
+        return sb.toString();
     }
 }

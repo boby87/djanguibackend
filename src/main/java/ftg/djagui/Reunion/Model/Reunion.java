@@ -15,6 +15,8 @@ public class Reunion {
     @Column(unique = true)
     private String libelle;
     private String telephone;
+    @Column(unique = true)
+    private String reference;
     private double montanttontine;
     private String createur;
     private String email;
@@ -143,5 +145,13 @@ public class Reunion {
 
     public void setEtat(boolean etat) {
         this.etat = etat;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 }
