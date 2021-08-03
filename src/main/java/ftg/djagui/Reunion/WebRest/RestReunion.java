@@ -26,7 +26,7 @@ public class RestReunion {
     List<Reunion> getAll(){
         return metierReunion.getAll();
     }
-    @GetMapping("by/{reunion}")
+    @GetMapping("name/{reunion}")
     Reunion getBy(@PathVariable String reunion){
         return metierReunion.getByname(reunion);
     }

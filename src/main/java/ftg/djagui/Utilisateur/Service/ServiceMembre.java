@@ -92,7 +92,7 @@ public class ServiceMembre implements MetierMembre {
             membres=daoAderants.save(aderants);
         }
 
-        if (dtoMembre.getReferent_reunion()==null){
+        if (dtoMembre.getReferent_reunion()!=null){
             Reunion reunion=daoReunion.findByReference(dtoMembre.getReferent_reunion());
             if (reunion==null) throw new ErrorMessages("Il y a un probléme avec la reference de la reunion",HttpStatus.FOUND);
             membres.setReunion(reunion);

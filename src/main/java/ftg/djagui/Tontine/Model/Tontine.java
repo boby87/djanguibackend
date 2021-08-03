@@ -8,16 +8,17 @@ import java.util.List;
 
 @Entity
 public class Tontine {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idtontine;
-    private Date date=new Date();
+    private Date date = new Date();
     private double montant;
-    private boolean status=true;
-  @OneToMany(mappedBy = "tontine")
-  private List<EnregistrerTontine> enregistrerTontines;
-  @OneToOne(mappedBy = "tontine")
-  @PrimaryKeyJoinColumn
-  private Seances seances;
+    private boolean status = true;
+    @OneToMany(mappedBy = "tontine")
+    private List<EnregistrerTontine> enregistrerTontines;
+    @OneToOne(mappedBy = "tontine")
+    @PrimaryKeyJoinColumn
+    private Seances seances;
 
     public Tontine() {
     }
@@ -33,7 +34,6 @@ public class Tontine {
     public void setIdtontine(Long idtontine) {
         this.idtontine = idtontine;
     }
-
 
 
     public Date getDate() {

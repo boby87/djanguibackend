@@ -1,8 +1,10 @@
 package ftg.djagui.Reunion.Service;
 
 import ftg.djagui.Reunion.Dao.DaoReunion;
+import ftg.djagui.Reunion.Dao.DaoSeances;
 import ftg.djagui.Reunion.Metier.MetierReunion;
 import ftg.djagui.Reunion.Model.Reunion;
+import ftg.djagui.Reunion.Model.Seances;
 import ftg.djagui.Reunion.WebRest.Dto.DtoReunion;
 import ftg.djagui.Utilisateur.Dao.DaoPresident;
 import ftg.djagui.Utilisateur.Metier.MetierMembre;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,6 +27,8 @@ import java.util.List;
 public class ServiceReunion implements MetierReunion {
     @Autowired
     DaoReunion daoReunion;
+    @Autowired
+    DaoSeances daoSeances;
     @Autowired
     DaoPresident daoPresident;
     @Autowired
@@ -83,5 +88,34 @@ public class ServiceReunion implements MetierReunion {
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         System.out.println("*************************" + sb.toString());
         return sb.toString();
+    }
+
+    @Override
+    public List<Seances> findAllSeanceByReferencereunion(String reference) {
+
+        return daoSeances.findAllSeanceByReferencereunion(reference);
+    }
+
+    @Override
+    public Seances CreateSeance(Seances seances, String referenceReunion) {
+        Seances seances1=findSeanceByReferencereunion(referenceReunion);
+        if (seances1!=null)throw new ErrorMessages("Bien vouloir fermer la seance du "+seances1.getLibelle(),HttpStatus.CONFLICT);
+        seances.setDate(new Date());
+        seances.setStatut(true);
+        return daoSeances.save(seances);
+    }
+
+    @Override
+    public Seances findSeanceByReferencereunion(String reference) {
+        return daoSeances.findSeanceByReferencereunion(reference);
+    }
+
+    @Override
+    public Seances cloturerSeance(Seances seances, Long idSeance) {
+        Seances seances1=daoSeances.findByIdseance(idSeance);
+        seances1.setStatut(false);
+        seances1.setOrdredujour(seances.getOrdredujour());
+        seances1.setRapport(seances.getRapport());
+        return seances1;
     }
 }

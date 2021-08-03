@@ -20,6 +20,7 @@ public class Seances {
     private Date jourtontine;
     private String ordredujour;
     private String rapport;
+    private boolean statut;
     @OneToOne
     @JoinColumn(name = "idcotisation")
     private Cotisation cotisation;
@@ -102,6 +103,14 @@ public class Seances {
 
     public void setJourtontine(Date jourtontine) {
         this.jourtontine = jourtontine;
+    }
+
+    public boolean isStatut() {
+        return statut;
+    }
+
+    public void setStatut(boolean statut) {
+        this.statut = statut;
     }
 
     public Cotisation getCotisation() {

@@ -1,6 +1,7 @@
 package ftg.djagui.Reunion.Metier;
 
 import ftg.djagui.Reunion.Model.Reunion;
+import ftg.djagui.Reunion.Model.Seances;
 import ftg.djagui.Reunion.WebRest.Dto.DtoReunion;
 import ftg.djagui.Utilisateur.Dao.DaoMembre;
 import ftg.djagui.Utilisateur.Model.Membres;
@@ -16,4 +17,9 @@ public interface MetierReunion {
     List<Reunion> getAll();
     Membres addMembreToReunion(DtoMembre dtoMembre, Long idpresident);
     String randomString(int len);
+    List<Seances> findAllSeanceByReferencereunion(String reference);
+    Seances CreateSeance(Seances seances, String referenceReunion);
+    Seances findSeanceByReferencereunion(String reference);
+
+    Seances cloturerSeance(Seances seances,Long idSeance);
 }
